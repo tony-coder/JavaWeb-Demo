@@ -153,4 +153,81 @@
         <url-pattern>*.txt</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+
+    <!-- 声明式安全 -->
+    <security-constraint>
+        <!-- <web-resource-collection> 定义一个或多个Web资源集合 -->
+        <web-resource-collection>
+            <!-- 指定资源的名称 -->
+            <web-resource-name>Account Servlet</web-resource-name>
+            <!-- 指定资源和方法 -->
+            <url-pattern>/account.do</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <!-- <auth-constraint> 指定可以访问受限资源的角色 -->
+        <auth-constraint>
+            <description>accessible to all manager</description>
+            <role-name>manager</role-name>
+        </auth-constraint>
+        <!-- <user-data-constraint> 指定数据应该如何在客户与服务器之间传输 -->
+        <user-data-constraint>
+            <transport-guarantee>NONE</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <!-- 只允许定义一种验证机制 -->
+    <login-config>
+<!--        &lt;!&ndash; 基本身份验证方法 &ndash;&gt;-->
+<!--        <auth-method>BASIC</auth-method>-->
+<!--        &lt;!&ndash;  <realm-name>元素仅用在HTTP基本验证（BASIC）中，指定安全域的名称  &ndash;&gt;-->
+<!--        <realm-name>Security Test</realm-name>-->
+
+<!--        &lt;!&ndash; 基于表单的验证方法 &ndash;&gt;-->
+<!--        <auth-method>FORM</auth-method>-->
+<!--        <form-login-config>-->
+<!--            <form-login-page>/jsp/loginPage.jsp</form-login-page>-->
+<!--            <form-error-page>/jsp/errprPage.jsp</form-error-page>-->
+<!--        </form-login-config>-->
+        <auth-method>BASIC</auth-method>
+        <realm-name>Programmatic Test</realm-name>
+    </login-config>
+
+    <security-role>
+        <role-name>manager</role-name>
+    </security-role>
+    <security-role>
+        <role-name>member</role-name>
+    </security-role>
+
+    <servlet>
+        <servlet-name>authorizeServlet</servlet-name>
+        <servlet-class>demo.AuthorizationServlet</servlet-class>
+        <!-- <security-role-ref>元素用来吧Servlet所使用的硬编码的角色名(director、employee)与实际角色名(manager、member)关联起来 -->
+        <security-role-ref>
+            <role-name>director</role-name>
+            <role-link>manager</role-link>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>employee</role-name>
+            <role-link>member</role-link>
+        </security-role-ref>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>authorizeServlet</servlet-name>
+        <url-pattern>/authorize.do</url-pattern>
+    </servlet-mapping>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Programmatic security</web-resource-name>
+            <url-pattern>/authorize.do</url-pattern>
+            <http-method>GET</http-method>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>manager</role-name>
+            <role-name>member</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
 </web-app>

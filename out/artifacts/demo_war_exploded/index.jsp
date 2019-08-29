@@ -74,6 +74,13 @@
 
     <a href="sayncListener">异步监听器示例</a>
 
+    <form method="post" action="account.do">
+        <a href="account.do">安全验证示例</a>
+        <input type="submit" value="post">
+    </form>
+
+    <a href="authorize.do">编程式安全示例</a>
+
     <img src="images/duke.gif">
 </div>
 
