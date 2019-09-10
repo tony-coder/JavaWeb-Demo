@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Using AJAX for validation</title>
+    <script type="text/javascript">
+        var xmlHttp;
+
+        function createXMLHttpRequest() {
+            if (window.XMLHttpRequest) {
+                xmlHttp = new XMLHttpRequest();
+            } else {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        }
+
+        function validData() {
+            createXMLHttpRequest();
+            xmlHttp.onreadystatechange = handleStateChange;
+            var username = document.getElementById("username");
+            var url = "/helloweb/validation.do?username=" + escape(username.value);  // escape() 函数可对字符串进行编码，这样就可以在所有的计算机上读取该字符串
+            xmlHttp.open("GET", url, true);
+            xmlHttp.send(null);
+        }
+
+        function handleStateChange() {
+            if (xmlHttp.readyState == 4) {
+                if (xmlHttp.status == 200) {
+                    var mwssage = xmlHttp.responseXML.getElementsByTagName("message")[0].firstChild.nodeValue;
+                    document.getElementById("results").innerHTML = "<p>" + mwssage + "</p>";
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<p>AJAX数据验证示例</p>
+用户名：<input type="text" size="10" id="username">
+<input type="button" value="检测" onclick="validData();">
+<div id="results"></div>
+
+</body>
+</html>

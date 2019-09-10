@@ -81,6 +81,20 @@
 
     <a href="authorize.do">编程式安全示例</a>
 
+    <a href="AJAX/simpleRequest.html">异步刷新简单示例</a>
+
+    <a href="AJAX/innerHTML.html">学生查询异步</a>
+
+    <a href="AJAX/parseXML.html">Parseing XML Response with DOM</a>
+
+    <a href="AJAX/gynamicContent.html">动态创建页面内容</a>
+
+    <a href="AJAX/register.html">AJAX数据验证示例</a>
+
+    <a href="AJAX/dynamicList.html">AJAX动态加载列表框示例</a>
+
+    <a href="AJAX/toolTip.html">AJAX创建工具提示</a>
+
     <img src="images/duke.gif">
 </div>
 

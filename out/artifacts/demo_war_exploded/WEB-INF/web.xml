@@ -158,6 +158,7 @@
     <security-constraint>
         <!-- <web-resource-collection> 定义一个或多个Web资源集合 -->
         <web-resource-collection>
+            <!-- 指定资源的名称 -->
             <web-resource-name>Account Servlet</web-resource-name>
             <!-- 指定资源和方法 -->
             <url-pattern>/account.do</url-pattern>
